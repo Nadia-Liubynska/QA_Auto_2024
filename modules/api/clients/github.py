@@ -17,3 +17,8 @@ class GitHub:
         r = requests.get('https://api.github.com/emojis')
         body = r.json()
         return body
+
+    def get_commits(self, name, repo):
+        r = requests.get(f'https://api.github.com/repos/{name}/{repo}/commits')
+        body = r.json()
+        return body
