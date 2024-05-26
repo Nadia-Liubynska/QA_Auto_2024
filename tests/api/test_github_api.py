@@ -30,3 +30,9 @@ def test_repo_cannot_be_found(github_api):
 def test_repo_with_single_char_can_be_found(github_api):
     r = github_api.search_repo('s')
     assert r['total_count'] != 0
+
+
+@pytest.mark.emoji
+def test_emoji_list(github_api):
+    r = github_api.get_emoji()
+    assert '2b1c.png' in r['white_large_square']
