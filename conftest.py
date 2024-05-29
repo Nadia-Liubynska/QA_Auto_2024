@@ -34,6 +34,6 @@ def github_api():
 
 
 @pytest.fixture
-def db_obj():
-    db = Database()
-    yield db
+def db():
+    database = Database()
+    yield database

@@ -20,15 +20,15 @@ class Database():
         return record
 
     def get_user_address_by_name(self, name):
-        query = "SELECT address, city, postalCode, country FROM customers"
-        query += f" WHERE name = '{name}'"
+        query = f"SELECT address, city, postalCode, country FROM customers \
+            WHERE name = '{name}'"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
 
     def update_product_qnt_by_id(self, product_id, qnt):
-        query = f"UPDATE products SET quantity = {qnt}"
-        query += f" WHERE id = {product_id}"
+        query = f"UPDATE products SET quantity = {qnt} \
+            WHERE id = {product_id}"
         self.cursor.execute(query)
         self.connection.commit()
 
@@ -37,3 +37,10 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
+
+    def insert_product(self, product_id, name, description, qnt):
+        query = f"INSERT OR REPLACE INTO products \
+            (id, name, description, quantity) \
+            VALUES ({product_id}, '{name}', '{description}', {qnt})"
+        self.cursor.execute(query)
+        self.connection.commit()

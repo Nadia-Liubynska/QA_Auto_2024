@@ -2,20 +2,20 @@ import pytest
 
 
 @pytest.mark.database
-def test_database_connection(db_obj):
-    db_obj.test_connection()
+def test_database_connection(db):
+    db.test_connection()
 
 
 @pytest.mark.database
-def test_check_all_users(db_obj):
-    users = db_obj.get_all_users()
+def test_check_all_users(db):
+    users = db.get_all_users()
 
     print(users)
 
 
 @pytest.mark.database
-def test_check_user_sergii(db_obj):
-    user = db_obj.get_user_address_by_name('Sergii')
+def test_check_user_sergii(db):
+    user = db.get_user_address_by_name('Sergii')
 
     assert user[0][0] == "Maydan Nezalezhnosti 1"
     assert user[0][1] == "Kyiv"
@@ -24,9 +24,17 @@ def test_check_user_sergii(db_obj):
 
 
 @pytest.mark.database
-@pytest.mark.wip
-def test_product_qnt_update(db_obj):
-    db_obj.update_product_qnt_by_id(1, 25)
-    water_qnt = db_obj.select_product_qnt_by_id(1)
+def test_product_qnt_update(db):
+    db.update_product_qnt_by_id(1, 25)
+    water_qnt = db.select_product_qnt_by_id(1)
 
     assert water_qnt[0][0] == 25
+
+
+@pytest.mark.database
+@pytest.mark.wip
+def test_product_insert(db):
+    db.insert_product(4, 'печиво', 'солодке', 30)
+    product_qnt = db.select_product_qnt_by_id(4)
+
+    assert product_qnt[0][0] == 30
