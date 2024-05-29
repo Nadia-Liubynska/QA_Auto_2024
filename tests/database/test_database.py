@@ -21,3 +21,12 @@ def test_check_user_sergii(db_obj):
     assert user[0][1] == "Kyiv"
     assert user[0][2] == "3127"
     assert user[0][3] == "Ukraine"
+
+
+@pytest.mark.database
+@pytest.mark.wip
+def test_product_qnt_update(db_obj):
+    db_obj.update_product_qnt_by_id(1, 25)
+    water_qnt = db_obj.select_product_qnt_by_id(1)
+
+    assert water_qnt[0][0] == 25
