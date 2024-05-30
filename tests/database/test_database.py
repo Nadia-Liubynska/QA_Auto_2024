@@ -32,9 +32,17 @@ def test_product_qnt_update(db):
 
 
 @pytest.mark.database
-@pytest.mark.wip
 def test_product_insert(db):
     db.insert_product(4, 'печиво', 'солодке', 30)
     product_qnt = db.select_product_qnt_by_id(4)
 
     assert product_qnt[0][0] == 30
+
+
+@pytest.mark.database
+def test_product_delete(db):
+    db.insert_product(99, 'тестові', 'дані', 999)
+    db.delete_product_by_id(99)
+    qnt = db.select_product_qnt_by_id(99)
+
+    assert len(qnt) == 0
