@@ -19,6 +19,12 @@ class Database():
         record = self.cursor.fetchall()
         return record
 
+    def get_all_products(self):
+        query = "SELECT * FROM products"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+
     def get_user_address_by_name(self, name):
         query = f"SELECT address, city, postalCode, country FROM customers \
             WHERE name = '{name}'"
@@ -39,7 +45,7 @@ class Database():
         return record
 
     def insert_product(self, product_id, name, description, qnt):
-        query = f"INSERT OR REPLACE INTO products \
+        query = f"INSERT INTO products \
             (id, name, description, quantity) \
             VALUES ({product_id}, '{name}', '{description}', {qnt})"
         self.cursor.execute(query)
@@ -57,5 +63,26 @@ class Database():
             JOIN customers ON orders.customer_id = customers.id \
             JOIN products ON orders.product_id = products.id"
         self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+
+    def get_product(self, product_id):
+        query = f"SELECT * FROM products WHERE id = {product_id}"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+
+    def auto_add_id(self, name, description, qnt):
+        query = f"INSERT INTO products \
+            (name, description, quantity) \
+            VALUES ('{name}', '{description}', {qnt})"
+        self.cursor.execute(query)
+        self.connection.commit()
+
+    # TOOLBOX
+    # for cursom queries
+    def hammer(self, query):
+        self.cursor.execute(query)
+        self.connection.commit()
         record = self.cursor.fetchall()
         return record

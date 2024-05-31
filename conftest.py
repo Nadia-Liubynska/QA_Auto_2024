@@ -37,3 +37,4 @@ def github_api():
 def db():
     database = Database()
     yield database
+    database.delete_product_by_id(999)
