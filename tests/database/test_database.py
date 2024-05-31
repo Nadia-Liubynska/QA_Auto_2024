@@ -49,7 +49,6 @@ def test_product_delete(db):
 
 
 @pytest.mark.database
-@pytest.mark.wip
 def test_detailed_orders(db):
     orders = db.get_detailed_orders()
     print("Замовлення", orders)
