@@ -79,6 +79,11 @@ class Database():
         self.cursor.execute(query)
         self.connection.commit()
 
+    def null_values(self, qnt):
+        query = f"INSERT INTO products (quantity) VALUES ({qnt})"
+        self.cursor.execute(query)
+        self.connection.commit()
+
     # TOOLBOX
     # for cursom queries
     def hammer(self, query):

@@ -64,6 +64,7 @@ def test_detailed_orders(db):
     assert orders[0][3] == 'з цукром'
 
 
+# ID 1
 # check that boolean values are converted into text or int
 # depending on the column datatype
 @pytest.mark.database
@@ -74,6 +75,7 @@ def test_insert_bool(db):
     assert type(product[0][3]) is int
 
 
+# ID 2
 # check that decimal values can't be inserted into the primary key column
 @pytest.mark.database
 def test_insert_decimal_into_primary_key(db):
@@ -83,6 +85,7 @@ def test_insert_decimal_into_primary_key(db):
     assert "IntegrityError" in str(error.type)
 
 
+# ID 3
 # check that integer text values are converted to int
 # if the column datatype is int
 @pytest.mark.database
@@ -93,6 +96,7 @@ def test_insert_integer_text_into_quantity(db):
     assert type(product[0][3]) is int
 
 
+# ID 4
 # check that text values can't be inserted
 # if the column datatype is int
 @pytest.mark.database
@@ -103,6 +107,7 @@ def test_insert_text_into_quantity(db):
     assert "OperationalError" in str(error.type)
 
 
+# ID 5
 # check that values in the id column are unique
 @pytest.mark.database
 def test_id_is_unique(db):
@@ -113,6 +118,7 @@ def test_id_is_unique(db):
     assert "IntegrityError" in str(error.type)
 
 
+# ID 6
 # check that no error is raised if id does not exist
 @pytest.mark.database
 def test_non_existent_id(db):
@@ -120,32 +126,83 @@ def test_non_existent_id(db):
     assert len(product) == 0
 
 
+# ID 7
 # check that valid id generates automatically
-# if id is not specified upon row creation
+# if id is not specified in the row creation query
 @pytest.mark.database
 def test_auto_add_id(db):
+    product_list = db.get_all_products()
+    last_id = product_list[-1][0]
     db.auto_add_id('тестові_дані', 'без_ід', 10)
     product_list = db.get_all_products()
+
+    assert product_list[-1][0] == last_id + 1
     assert product_list[-1][1] == 'тестові_дані'
     assert product_list[-1][2] == 'без_ід'
+
     db.delete_product_by_id(product_list[-1][0])
 
 
+# ID 8
+# check that NULL values can be successfully added as values
+# for the name, description, and quantity columns of the products table
+@pytest.mark.database
+def test_null_values(db):
+    product_list = db.get_all_products()
+    last_id = product_list[-1][0]
+    db.null_values('NULL')
+    product_list = db.get_all_products()
+
+    assert product_list[-1][0] == last_id + 1
+    assert product_list[-1][1] is None
+    assert product_list[-1][2] is None
+    assert product_list[-1][3] is None
+
+    db.delete_product_by_id(product_list[-1][0])
+
+
+# ID 9
+# check that max integer value can be added as a valid id
+@pytest.mark.database
+def test_id_max_value(db):
+    db.insert_product(9223372036854775807, 'тестові', 'дані', 10)
+    product = db.get_product(9223372036854775807)
+
+    assert product[0][1] == 'тестові'
+    assert product[0][2] == 'дані'
+
+    db.delete_product_by_id(9223372036854775807)
+
+
+# ID 10
+# check that using integer value greater than the max integer value for the id
+# raises an IntegrityError error
+@pytest.mark.database
+def test_id_out_of_range(db):
+    with pytest.raises(IntegrityError) as error:
+        db.insert_product(9223372036854775808, 'тестові', 'дані', 10)
+    assert "datatype mismatch" in str(error.value)
+    assert "IntegrityError" in str(error.type)
+
+
 # TOOLBOX (comment these tests before running the entire set!)
+
 # when you have a hammer everything looks like a nail
-# (make custom requests for test creation purposes)
-@pytest.mark.hammer
-def test_hammer(db):
-    query = "SELECT * FROM products"
-    products = db.hammer(query)
-    for line in products:
-        print()
-        for cell in line:
-            print(f"{cell} type {type(cell)}")
+# (make custom requests to look up anything you need while creating tests)
+
+# @pytest.mark.hammer
+# def test_hammer(db):
+#     query = "SELECT * FROM products"
+#     result = db.hammer(query)
+#     for line in result:
+#         print()
+#         for cell in line:
+#             print(f"{cell} type {type(cell)}")
 
 
-# manually EVAPORATE your mistakes! and stray test data, I guess
-@pytest.mark.evaporate
-def test_EVAPORATE(db):
-    query = "DELETE FROM products WHERE name = 'тестові'"
-    db.hammer(query)
+# manually EVAPORATE your mistakes! and stray test data
+
+# @pytest.mark.evaporate
+# def test_EVAPORATE(db):
+#     query = "DELETE FROM products WHERE id = 9223372036854775807"
+#     db.hammer(query)
