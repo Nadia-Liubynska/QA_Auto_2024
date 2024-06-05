@@ -183,26 +183,3 @@ def test_id_out_of_range(db):
         db.insert_product(9223372036854775808, 'тестові', 'дані', 10)
     assert "datatype mismatch" in str(error.value)
     assert "IntegrityError" in str(error.type)
-
-
-# TOOLBOX (comment these tests before running the entire set!)
-
-# when you have a hammer everything looks like a nail
-# (make custom requests to look up anything you need while creating tests)
-
-# @pytest.mark.hammer
-# def test_hammer(db):
-#     query = "SELECT * FROM products"
-#     result = db.hammer(query)
-#     for line in result:
-#         print()
-#         for cell in line:
-#             print(f"{cell} type {type(cell)}")
-
-
-# manually EVAPORATE your mistakes! and stray test data
-
-# @pytest.mark.evaporate
-# def test_EVAPORATE(db):
-#     query = "DELETE FROM products WHERE id = 9223372036854775807"
-#     db.hammer(query)
