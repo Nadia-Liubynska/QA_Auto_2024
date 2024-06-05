@@ -83,11 +83,3 @@ class Database():
         query = f"INSERT INTO products (quantity) VALUES ({qnt})"
         self.cursor.execute(query)
         self.connection.commit()
-
-    # TOOLBOX
-    # for cursom queries
-    def hammer(self, query):
-        self.cursor.execute(query)
-        self.connection.commit()
-        record = self.cursor.fetchall()
-        return record
