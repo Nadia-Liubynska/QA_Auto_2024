@@ -43,7 +43,8 @@ def test_emoji_list(github_api):
 @pytest.mark.commit_list
 def test_commit_list(github_api):
     r = github_api.get_commits('Nadia-Liubynska', 'QA_Auto_2024')
-    assert r[0]['commit']['author']['name'] == "Nadia Liubynska"
+    assert r[0]['author']['type'] == 'User'
+    assert r[0]['committer']['type'] == 'User'
 
 
 @pytest.mark.api
