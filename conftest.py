@@ -1,6 +1,8 @@
 import pytest
 from modules.api.clients.github import GitHub
 from modules.common.database import Database
+from modules.ui.page_objects.tumblr_sign_in_page import TumblrSignInPage
+from modules.ui.page_objects.tumblr_blog_page import TumblrBlogPage
 
 
 class User:
@@ -40,3 +42,21 @@ def db():
     yield database
 
     database.delete_product_by_id(999)
+
+
+@pytest.fixture
+def tumblr_sign_in_page():
+    pageobject = TumblrSignInPage()
+
+    yield pageobject
+
+    pageobject.close()
+
+
+@pytest.fixture
+def tumblr_blog_page():
+    pageobject = TumblrBlogPage()
+
+    yield pageobject
+
+    pageobject.close()
