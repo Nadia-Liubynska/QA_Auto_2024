@@ -16,16 +16,18 @@ A Python test automation framework created as a pet project during the Automatio
 
 To run tests on this framework, you will need to:
 - Install the latest **Python** build from the [official website](https://www.python.org/downloads/).
-- Install **Pytest** module via a console command:
+- Install **Pytest** module using this console command:
 ```
 pip3 install pytest -U
 ```
-- Install **Selenium** using a console command:
+- Install **Selenium** using this console command:
 ```
 pip3 install selenium --user
 ```
 or
-```sudo pip3 install selenium --user```
+```
+sudo pip3 install selenium --user
+```
 - Selenium WebDriver for Google Chrome is included in the project.
 
 ## Installation
