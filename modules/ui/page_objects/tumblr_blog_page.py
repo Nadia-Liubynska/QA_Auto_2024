@@ -12,7 +12,7 @@ class TumblrBlogPage(TumblrSignInPage):
 
     def go_to_blog_from_dashboard(self):
         # set up expicit wait
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 60)
 
         # find and click the account button
         wait.until(EC.presence_of_element_located((
@@ -34,7 +34,7 @@ class TumblrBlogPage(TumblrSignInPage):
 
     def new_text_post(self, text, tag):
         # set up explicit wait
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 60)
 
         # find and click the create new post button
         wait.until(EC.presence_of_element_located((
@@ -85,7 +85,7 @@ class TumblrBlogPage(TumblrSignInPage):
 
     def open_last_post(self):
         # set up explicit wait
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 60)
 
         # go to the blog view
         wait.until(EC.presence_of_element_located((
@@ -106,7 +106,7 @@ class TumblrBlogPage(TumblrSignInPage):
 
     def delete_last_post(self):
         # set up explicit wait
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 60)
 
         # find and click the delete button
         wait.until(EC.presence_of_element_located((

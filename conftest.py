@@ -5,6 +5,7 @@ from modules.ui.page_objects.tumblr_sign_in_page import TumblrSignInPage
 from modules.ui.page_objects.tumblr_blog_page import TumblrBlogPage
 
 
+# class for the api basics tests
 class User:
     def __init__(self) -> None:
         self.name = None
@@ -19,6 +20,7 @@ class User:
         self.second_name = ""
 
 
+# fixture for the api basics tests
 @pytest.fixture
 def user():
     user = User()
@@ -29,21 +31,24 @@ def user():
     user.remove()
 
 
+# fixture for the GitHub part of the api tests
 @pytest.fixture
-def github_api():
+def github_api_client():
     api = GitHub()
     yield api
 
 
+# fixture for the database part of the api tests
 @pytest.fixture
 def db():
     database = Database()
 
     yield database
 
-    database.delete_product_by_id(999)
+    database.delete_product_by_id(database.test_id)
 
 
+# fixtures for the tumblr part of the UI tests
 @pytest.fixture
 def tumblr_sign_in_page():
     pageobject = TumblrSignInPage()

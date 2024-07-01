@@ -1,6 +1,7 @@
 import pytest
 
 
+# api basics tests
 @pytest.mark.check
 def test_change_name(user):
     assert user.name == "Nadia"

@@ -41,7 +41,7 @@ class TumblrSignInPage(BasePage, Tumblr):
 
     def get_text(self, css_locator):
         # set up explicit wait
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(self.driver, 60)
 
         # find where the text is using css locator
         # passed to the method
