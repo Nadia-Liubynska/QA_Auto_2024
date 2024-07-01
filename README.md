@@ -28,7 +28,7 @@ or
 ```
 sudo pip3 install selenium --user
 ```
-- Selenium WebDriver for Google Chrome is included in the project.
+- This project uses Selenium WebDriver for Google Chrome version 115 or newer, which is included in the [drivers folder](/drivers).
 
 ## Installation
 
