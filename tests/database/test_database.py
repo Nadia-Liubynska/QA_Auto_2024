@@ -302,24 +302,24 @@ def test_id_out_of_range(db):
 # when you have a hammer everything looks like a nail
 # (make custom requests to look up anything you need while creating tests)
 
-@pytest.mark.hammer
-def test_hammer(db):
-    query = "SELECT * FROM products"
+# @pytest.mark.hammer
+# def test_hammer(db):
+#     query = "SELECT * FROM products"
 
-    result = db.hammer(query)
+#     result = db.hammer(query)
 
-    for line in result:
-        print()
-        for cell in line:
-            print(f"{cell} type {type(cell)}")
+#     for line in result:
+#         print()
+#         for cell in line:
+#             print(f"{cell} type {type(cell)}")
 
 
 # manually EVAPORATE your mistakes! and stray test data
 
-@pytest.mark.evaporate
-def test_EVAPORATE(db):
-    to_delete = []
+# @pytest.mark.evaporate
+# def test_EVAPORATE(db):
+#     to_delete = []
 
-    for id in to_delete:
-        query = f"DELETE FROM products WHERE id = {id}"
-        db.hammer(query)
+#     for id in to_delete:
+#         query = f"DELETE FROM products WHERE id = {id}"
+#         db.hammer(query)
