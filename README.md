@@ -20,7 +20,7 @@ To run tests on this framework, you will need to:
 ```
 pip3 install pytest -U
 ```
-- Install **Selenium** using this console command:
+- Install **Selenium** using these console commands:
 ```
 pip3 install selenium --user
 ```
@@ -28,7 +28,7 @@ or
 ```
 sudo pip3 install selenium --user
 ```
-- This project uses Selenium WebDriver for Google Chrome version 115 or newer, which is included in the [drivers folder](/drivers).
+- For UI tests this project uses Selenium WebDriver for Google Chrome version 115 or newer, which is included in the [drivers folder](/drivers).
 
 ## Installation
 
@@ -36,7 +36,7 @@ Clone the repo to your local machine.
 
 ## Usage
 
-You can run all the tests by executing `pytest` command in the repo's root directory. For running certain sets of tests, all the automation tests were marked accordingly. For example, to run tests for the GitHub part of the api tests, use this console command:
+You can run all the tests by executing `pytest` console command in the repo's root directory. For running certain sets of tests, all the auto tests were marked accordingly. For example, to run tests for the GitHub part of the api tests, use this console command:
 ```
 pytest -m github
 ```
