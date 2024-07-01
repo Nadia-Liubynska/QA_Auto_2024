@@ -32,7 +32,7 @@ sudo pip3 install selenium --user
 
 ## Installation
 
-Copy the repo to your local machine.
+Clone the repo to your local machine.
 
 ## Usage
 
